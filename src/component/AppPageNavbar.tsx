@@ -1,4 +1,4 @@
-import { Home, DarkMode, LightMode } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -10,10 +10,11 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  InputBase,
+  Avatar,
 } from "@mui/material";
-import ThemeToggleButton from "./ThemeToggleButton";
-
 import { useState } from "react";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -24,38 +25,59 @@ const StyledButton = styled(Button)({
   margin: "2px",
 });
 
-const LandingPageNavbar: React.FC = () => {
-  // const [darkMode, setDarkMode] = useState(false);
+const Search = styled("div")(({ theme }) => ({
+  backgroundColor: "white",
+  padding: "0 10px",
+  borderRadius: theme.shape.borderRadius,
+  width: "40%",
+}));
+
+const AppPageNavbar: React.FC = () => {
+  //   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const loginButton = (
+  const logoutButton = (
     <StyledButton variant="contained" color="info">
-      LOGIN
+      LOGOUT
     </StyledButton>
   );
 
-  const registerButton = (
-    <StyledButton variant="contained" color="info">
-      REGISTER
-    </StyledButton>
-  );
+  const avatar = <Avatar>DM</Avatar>;
 
   return (
     <AppBar position="sticky">
       <StyledToolbar>
-        {/* Left Portion of Navbar */}
-        <IconButton>
-          <Home />
-        </IconButton>
+        {/* Left portion of App Bar */}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <IconButton>
+            <Home />
+          </IconButton>
+          <Typography
+            variant="h5"
+            sx={{ display: { sm: "block", xs: "none" } }}
+          >
+            Todo APP
+          </Typography>
+        </Box>
 
-        {/* Center Portion of Navbar */}
-        <Typography variant="h4">Todo APP</Typography>
+        {/* Center portion of App Bar */}
+        <Search>
+          <InputBase placeholder="Search ..." />
+        </Search>
 
-        {/* Right Portion of Navbar */}
-        <Box sx={{ display: { sm: "flex", xs: "none" }, alignItems: "center" }}>
+        {/* Right portion of App Bar */}
+        <Box
+          sx={{
+            display: { sm: "flex", xs: "none" },
+            alignItems: "center",
+            "& > *": {
+              mx: 0.5,
+            },
+          }}
+        >
           <ThemeToggleButton />
-          {loginButton}
-          {registerButton}
+          {avatar}
+          {logoutButton}
         </Box>
 
         {/* Right Portion of App Bar for mobile view */}
@@ -89,8 +111,8 @@ const LandingPageNavbar: React.FC = () => {
             <MenuItem>
               <ThemeToggleButton />
             </MenuItem>
-            <MenuItem>{loginButton}</MenuItem>
-            <MenuItem>{registerButton}</MenuItem>
+            <MenuItem>{avatar}</MenuItem>
+            <MenuItem>{logoutButton}</MenuItem>
           </Box>
         </Menu>
       </StyledToolbar>
@@ -98,4 +120,4 @@ const LandingPageNavbar: React.FC = () => {
   );
 };
 
-export default LandingPageNavbar;
+export default AppPageNavbar;
