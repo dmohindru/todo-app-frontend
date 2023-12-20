@@ -1,9 +1,8 @@
-import Navbar from "./component/Navbar";
+import LandingPageNavbar from "./component/LandingPageNavbar";
 const App: React.FC = () => {
   return (
     <div>
-      Todo App Front end
-      <Navbar />
+      <LandingPageNavbar />
     </div>
   );
 };
