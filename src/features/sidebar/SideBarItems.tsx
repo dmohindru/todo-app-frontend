@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography } from "@mui/material";
+import { Avatar, Typography, Button } from "@mui/material";
 interface SidBarItemsProps {
   titleName: string;
   isMobile?: boolean;
@@ -15,7 +15,13 @@ const SideBarItems: React.FC<SidBarItemsProps> = ({ titleName, isMobile }) => {
   }
   return (
     <>
-      <Box display="flex" gap={2} sx={{ alignItems: "center" }}>
+      <Button
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
         <Avatar
           sx={{
             width: 36,
@@ -28,11 +34,11 @@ const SideBarItems: React.FC<SidBarItemsProps> = ({ titleName, isMobile }) => {
         </Avatar>
         <Typography
           variant="body1"
-          sx={{ display: { sm: "block", xs: "none" } }}
+          sx={{ display: { sm: "block", xs: "none" }, ml: 2 }}
         >
           {titleName}
         </Typography>
-      </Box>
+      </Button>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, Stack, styled } from "@mui/material";
+import { Box, Stack, styled, Button } from "@mui/material";
 import SideBarItems from "./SideBarItems";
 
 const SideBar: React.FC = () => {
@@ -25,6 +25,7 @@ const SideBar: React.FC = () => {
           {data.map((item, i) => (
             <SideBarItems titleName={item.titleName} />
           ))}
+          <Button fullWidth>Add</Button>
         </Stack>
       </Box>
     </SideBarBox>
