@@ -42,7 +42,11 @@ const AppPageNavbar: React.FC = () => {
     </StyledButton>
   );
 
-  const avatar = <Avatar>DM</Avatar>;
+  const avatar = (
+    <Avatar sx={{ width: 36, height: 36, fontSize: 14, fontWeight: "bold" }}>
+      DM
+    </Avatar>
+  );
 
   return (
     <AppBar position="sticky">
