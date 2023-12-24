@@ -3,11 +3,11 @@ import SideBarItems from "./SideBarItems";
 
 const SideBar: React.FC = () => {
   const data = [
-    { titleName: "Grocery" },
-    { titleName: "School List" },
-    { titleName: "Shopping List" },
-    { titleName: "Office Work" },
-    { titleName: "Fun Todo" },
+    { id: "id-1", titleName: "Grocery" },
+    { id: "id-2", titleName: "School List" },
+    { id: "id-3", titleName: "Shopping List" },
+    { id: "id-4", titleName: "Office Work" },
+    { id: "id-5", titleName: "Fun Todo" },
   ];
 
   const SideBarBox = styled(Box)(({ theme }) => ({
@@ -23,7 +23,7 @@ const SideBar: React.FC = () => {
       <Box position="fixed" sx={{ mt: 5 }}>
         <Stack spacing={4}>
           {data.map((item, i) => (
-            <SideBarItems titleName={item.titleName} />
+            <SideBarItems key={item.titleName} titleName={item.titleName} />
           ))}
           <Button fullWidth>Add</Button>
         </Stack>

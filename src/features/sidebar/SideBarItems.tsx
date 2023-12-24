@@ -33,7 +33,7 @@ const SideBarItems: React.FC<SidBarItemsProps> = ({ titleName, isMobile }) => {
           {avatarText}
         </Avatar>
         <Typography
-          variant="body1"
+          variant="body2"
           sx={{ display: { sm: "block", xs: "none" }, ml: 2 }}
         >
           {titleName}
