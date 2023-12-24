@@ -1,5 +1,7 @@
 import { Box, Typography, ButtonGroup, styled } from "@mui/material";
 import TodoButtonGroup from "./TodoButtonGroup";
+import TodoList from "./TodoList";
+import AddTodoActionButton from "./AddTodoActionButton";
 
 const AppPage: React.FC = () => {
   const todoData = [
@@ -37,8 +39,8 @@ const AppPage: React.FC = () => {
     <Box sx={{ flex: 9, mx: 5 }}>
       <Box
         sx={{
-          backgroundColor: "lightgreen",
-          height: "100vh",
+          // backgroundColor: "lightgreen",
+          // height: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -51,7 +53,9 @@ const AppPage: React.FC = () => {
           Grocery
         </Typography>
         <TodoButtonGroup />
+        <TodoList />
       </Box>
+      <AddTodoActionButton />
     </Box>
     // </Container>
   );

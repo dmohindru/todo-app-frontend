@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from "@mui/material";
 import { useState, useEffect } from "react";
 
 type filterValue = "ALL" | "DONE" | "PENDING";
-
+// TODO redo this component with <ToggleButtonGroup> and <ToggleButton>
 const TodoButtonGroup: React.FC = () => {
   const [filter, setSelectedFilter] = useState<filterValue>("ALL");
   const handleButtonClick = (value: filterValue) => {
