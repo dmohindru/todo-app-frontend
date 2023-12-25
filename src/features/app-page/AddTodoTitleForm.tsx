@@ -1,0 +1,121 @@
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Paper,
+  styled,
+} from "@mui/material";
+import { Formik } from "formik";
+import * as yup from "yup";
+
+interface TodoTitleFormProps {
+  isAdd: boolean;
+}
+
+interface FormProps {
+  title: string;
+  description: string;
+}
+
+const initialValues: FormProps = {
+  title: "",
+  description: "",
+};
+
+const todoTitleSchema = yup.object().shape({
+  title: yup.string().required("title is required"),
+  description: yup.string().required("description is required"),
+});
+
+const StyledTypography = styled(Typography)({
+  fontWeight: "bold",
+  marginBottom: 10,
+});
+
+const StyledTextField = styled(TextField)({
+  marginBottom: 10,
+});
+
+const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
+  const handleFormSubmit = (values: FormProps) => {
+    console.log("title ", values.title);
+    console.log("description ", values.description);
+    values.title = "";
+    values.description = "";
+  };
+
+  return (
+    <Box sx={{ flex: 9, mx: 5 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{ my: 5, textTransform: "uppercase", fontWeight: "bold" }}
+        >
+          {isAdd ? "Add" : "Edit"} Todo List
+        </Typography>
+        <Formik
+          onSubmit={handleFormSubmit}
+          initialValues={initialValues}
+          validationSchema={todoTitleSchema}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
+                <Box>
+                  <StyledTypography>Title</StyledTypography>
+                  <StyledTextField
+                    fullWidth
+                    variant="filled"
+                    label="Todo List Title"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.title}
+                    name="title"
+                    error={!!touched.title && !!errors.title}
+                    helperText={touched.title && errors.title}
+                  />
+                  <StyledTypography>Description</StyledTypography>
+                  <StyledTextField
+                    fullWidth
+                    variant="filled"
+                    label="Todo List Title Description"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.description}
+                    name="description"
+                    error={!!touched.description && !!errors.description}
+                    helperText={touched.description && errors.description}
+                  />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    sx={{ mt: 2 }}
+                  >
+                    Create Todo List
+                  </Button>
+                </Box>
+              </Paper>
+            </form>
+          )}
+        </Formik>
+      </Box>
+    </Box>
+  );
+};
+
+export default AddTodoTitleForm;

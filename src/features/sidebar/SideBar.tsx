@@ -19,7 +19,7 @@ const SideBar: React.FC = () => {
     },
   }));
   return (
-    <SideBarBox flex={3}>
+    <SideBarBox>
       <Box position="fixed" sx={{ mt: 5 }}>
         <Stack spacing={4}>
           {data.map((item, i) => (
