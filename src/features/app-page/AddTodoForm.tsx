@@ -6,10 +6,10 @@ import {
   Paper,
   styled,
 } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 
-interface TodoTitleFormProps {
+interface TodoFormProps {
   isAdd: boolean;
 }
 
@@ -24,8 +24,8 @@ const initialValues: FormProps = {
 };
 
 const todoTitleSchema = yup.object().shape({
-  title: yup.string().required("title is required"),
-  description: yup.string().required("description is required"),
+  title: yup.string().required("todo title is required"),
+  description: yup.string().required("todo description is required"),
 });
 
 const StyledTypography = styled(Typography)({
@@ -37,12 +37,14 @@ const StyledTextField = styled(TextField)({
   marginBottom: 10,
 });
 
-const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
-  const handleFormSubmit = (values: FormProps) => {
+const AddTodoForm: React.FC<TodoFormProps> = ({ isAdd }) => {
+  const handleFormSubmit = (
+    values: FormProps,
+    { resetForm }: FormikHelpers<FormProps>
+  ) => {
     console.log("title ", values.title);
     console.log("description ", values.description);
-    values.title = "";
-    values.description = "";
+    resetForm();
   };
 
   return (
@@ -58,7 +60,7 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
           variant="h4"
           sx={{ my: 5, textTransform: "uppercase", fontWeight: "bold" }}
         >
-          {isAdd ? "Add" : "Edit"} Todo List
+          {isAdd ? "Add" : "Update"} a todo
         </Typography>
         <Formik
           onSubmit={handleFormSubmit}
@@ -76,7 +78,7 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
             <form onSubmit={handleSubmit}>
               <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
                 <Box>
-                  <StyledTypography>Title</StyledTypography>
+                  <StyledTypography>Todo Title</StyledTypography>
                   <StyledTextField
                     fullWidth
                     variant="filled"
@@ -87,8 +89,9 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
                     name="title"
                     error={!!touched.title && !!errors.title}
                     helperText={touched.title && errors.title}
+                    size="small"
                   />
-                  <StyledTypography>Description</StyledTypography>
+                  <StyledTypography>Todo Description</StyledTypography>
                   <StyledTextField
                     fullWidth
                     variant="filled"
@@ -99,6 +102,7 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
                     name="description"
                     error={!!touched.description && !!errors.description}
                     helperText={touched.description && errors.description}
+                    size="small"
                   />
                   <Button
                     type="submit"
@@ -106,7 +110,7 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
                     fullWidth
                     sx={{ mt: 2 }}
                   >
-                    Create Todo List
+                    {isAdd ? "Create" : "Update"} a Todo
                   </Button>
                 </Box>
               </Paper>
@@ -118,4 +122,4 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
   );
 };
 
-export default AddTodoTitleForm;
+export default AddTodoForm;
