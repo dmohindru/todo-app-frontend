@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useState } from "react";
 
 interface PasswordFieldProps {
   name: string;
@@ -34,25 +32,29 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
     setShowPassword(!showPassword);
   };
 
+  const adornment = (
+    <InputAdornment position="end">
+      <IconButton edge="end" onClick={handleTogglePassword}>
+        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+      </IconButton>
+    </InputAdornment>
+  );
+
   return (
     <TextField
       label={label}
+      name={name}
       type={showPassword ? "text" : "password"}
       value={value}
-      variant="outlined"
+      variant="filled"
       fullWidth
+      size="small"
       onBlur={onBlur}
       onChange={onChange}
       error={error}
       helperText={helperText}
       InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton onClick={handleTogglePassword} edge="end">
-              {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            </IconButton>
-          </InputAdornment>
-        ),
+        endAdornment: adornment,
       }}
     />
   );

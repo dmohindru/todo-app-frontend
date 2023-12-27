@@ -126,41 +126,24 @@ const UserRegistration: React.FC = () => {
                 size="small"
               />
               <StyledTypography>Password</StyledTypography>
-              {/* <StyledTextField
-                fullWidth
-                variant="filled"
-                label="Password"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
-                name="password"
-                error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
-                size="small"
-                type="password"
-              /> */}
               <PasswordField
                 onBlur={handleBlur}
                 onChange={handleChange}
                 name="password"
-                label="password"
+                label="Password"
                 value={values.password}
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
               />
               <StyledTypography>Confirm Password</StyledTypography>
-              <StyledTextField
-                fullWidth
-                variant="filled"
-                label="Confirm Password"
+              <PasswordField
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.confirmPassword}
                 name="confirmPassword"
+                label="Confirm Password"
+                value={values.confirmPassword}
                 error={!!touched.confirmPassword && !!errors.confirmPassword}
                 helperText={touched.confirmPassword && errors.confirmPassword}
-                size="small"
-                type="password"
               />
               <Button
                 type="submit"
