@@ -6,17 +6,19 @@ import SideBar from "./features/sidebar/SideBar";
 import AppPage from "./features/app-page/AppPage";
 import { Box } from "@mui/material";
 import UserRegistration from "./component/UserRegistration";
+import UserLogin from "./component/UserLogin";
 const App: React.FC = () => {
   return (
     <>
       {/* <LandingPageNavbar /> */}
       <AppPageNavbar />
-      <UserRegistration />
+      {/* <UserRegistration /> */}
+      {/* <UserLogin /> */}
       <Box sx={{ display: "flex", flexDirection: "row" }}>
-        {/* <SideBar /> */}
+        <SideBar />
         {/* <AppPage /> */}
         {/* <AddTodoListForm isAdd={false} /> */}
-        {/* <AddTodoForm isAdd={false} /> */}
+        <AddTodoForm isAdd />
       </Box>
     </>
   );

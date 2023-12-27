@@ -6,7 +6,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { Formik, FormikHelpers } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 import * as yup from "yup";
 import PasswordField from "./PasswordField";
 
@@ -50,13 +50,26 @@ const StyledTextField = styled(TextField)({
 });
 
 const UserRegistration: React.FC = () => {
-  const handleFormSubmit = (
-    values: RegistartionFormProps,
-    { resetForm }: FormikHelpers<RegistartionFormProps>
-  ) => {
-    console.log("values", values);
-    resetForm();
-  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema: registrationFormSchema,
+    onSubmit: (values, { resetForm }: FormikHelpers<RegistartionFormProps>) => {
+      console.log("values", values);
+      resetForm();
+    },
+  });
+
+  // destructure formik object
+  const {
+    handleSubmit,
+    handleBlur,
+    handleChange,
+    values,
+    errors,
+    touched,
+    isValid,
+    dirty,
+  } = formik;
 
   return (
     <Box
@@ -71,92 +84,78 @@ const UserRegistration: React.FC = () => {
       <Typography variant="h4" sx={{ my: 3, fontWeight: "bold" }}>
         User Registration
       </Typography>
-      <Formik
-        onSubmit={handleFormSubmit}
-        initialValues={initialValues}
-        validationSchema={registrationFormSchema}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleBlur,
-          handleChange,
-          handleSubmit,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
-              <StyledTypography>First Name</StyledTypography>
-              <StyledTextField
-                fullWidth
-                variant="filled"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                size="small"
-              />
-              <StyledTypography>Last Name</StyledTypography>
-              <StyledTextField
-                fullWidth
-                variant="filled"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                size="small"
-              />
-              <StyledTypography>Email</StyledTypography>
-              <StyledTextField
-                fullWidth
-                variant="filled"
-                label="Email"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
-                size="small"
-              />
-              <StyledTypography>Password</StyledTypography>
-              <PasswordField
-                onBlur={handleBlur}
-                onChange={handleChange}
-                name="password"
-                label="Password"
-                value={values.password}
-                error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
-              />
-              <StyledTypography>Confirm Password</StyledTypography>
-              <PasswordField
-                onBlur={handleBlur}
-                onChange={handleChange}
-                name="confirmPassword"
-                label="Confirm Password"
-                value={values.confirmPassword}
-                error={!!touched.confirmPassword && !!errors.confirmPassword}
-                helperText={touched.confirmPassword && errors.confirmPassword}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                sx={{ mt: 2 }}
-              >
-                Register
-              </Button>
-            </Paper>
-          </form>
-        )}
-      </Formik>
+      <form onSubmit={handleSubmit}>
+        <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
+          <StyledTypography>First Name</StyledTypography>
+          <StyledTextField
+            fullWidth
+            variant="filled"
+            label="First Name"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.firstName}
+            name="firstName"
+            error={!!touched.firstName && !!errors.firstName}
+            helperText={touched.firstName && errors.firstName}
+            size="small"
+          />
+          <StyledTypography>Last Name</StyledTypography>
+          <StyledTextField
+            fullWidth
+            variant="filled"
+            label="Last Name"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.lastName}
+            name="lastName"
+            error={!!touched.lastName && !!errors.lastName}
+            helperText={touched.lastName && errors.lastName}
+            size="small"
+          />
+          <StyledTypography>Email</StyledTypography>
+          <StyledTextField
+            fullWidth
+            variant="filled"
+            label="Email"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.email}
+            name="email"
+            error={!!touched.email && !!errors.email}
+            helperText={touched.email && errors.email}
+            size="small"
+          />
+          <StyledTypography>Password</StyledTypography>
+          <PasswordField
+            onBlur={handleBlur}
+            onChange={handleChange}
+            name="password"
+            label="Password"
+            value={values.password}
+            error={!!touched.password && !!errors.password}
+            helperText={touched.password && errors.password}
+          />
+          <StyledTypography>Confirm Password</StyledTypography>
+          <PasswordField
+            onBlur={handleBlur}
+            onChange={handleChange}
+            name="confirmPassword"
+            label="Confirm Password"
+            value={values.confirmPassword}
+            error={!!touched.confirmPassword && !!errors.confirmPassword}
+            helperText={touched.confirmPassword && errors.confirmPassword}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2 }}
+            disabled={!(dirty && isValid)}
+          >
+            Register
+          </Button>
+        </Paper>
+      </form>
     </Box>
   );
 };

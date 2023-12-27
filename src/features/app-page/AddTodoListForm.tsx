@@ -6,7 +6,7 @@ import {
   Paper,
   styled,
 } from "@mui/material";
-import { Formik, FormikHelpers } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 import * as yup from "yup";
 
 interface TodoTitleFormProps {
@@ -38,14 +38,27 @@ const StyledTextField = styled(TextField)({
 });
 
 const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
-  const handleFormSubmit = (
-    values: FormProps,
-    { resetForm }: FormikHelpers<FormProps>
-  ) => {
-    console.log("title ", values.title);
-    console.log("description ", values.description);
-    resetForm();
-  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema: todoTitleSchema,
+    onSubmit: (values, { resetForm }: FormikHelpers<FormProps>) => {
+      console.log("title ", values.title);
+      console.log("description ", values.description);
+      resetForm();
+    },
+  });
+
+  // destructure formik object
+  const {
+    handleSubmit,
+    handleBlur,
+    handleChange,
+    values,
+    errors,
+    touched,
+    isValid,
+    dirty,
+  } = formik;
 
   return (
     <Box sx={{ flex: 9, mx: 5 }}>
@@ -62,61 +75,48 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
         >
           {isAdd ? "Add" : "Update"} Todo List
         </Typography>
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={todoTitleSchema}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
-                <Box>
-                  <StyledTypography>Title</StyledTypography>
-                  <StyledTextField
-                    fullWidth
-                    variant="filled"
-                    label="Todo List Title"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.title}
-                    name="title"
-                    error={!!touched.title && !!errors.title}
-                    helperText={touched.title && errors.title}
-                    size="small"
-                  />
-                  <StyledTypography>Description</StyledTypography>
-                  <StyledTextField
-                    fullWidth
-                    variant="filled"
-                    label="Todo List Title Description"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.description}
-                    name="description"
-                    error={!!touched.description && !!errors.description}
-                    helperText={touched.description && errors.description}
-                    size="small"
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    fullWidth
-                    sx={{ mt: 2 }}
-                  >
-                    {isAdd ? "Create" : "Update"} Todo List
-                  </Button>
-                </Box>
-              </Paper>
-            </form>
-          )}
-        </Formik>
+
+        <form onSubmit={handleSubmit}>
+          <Paper elevation={2} sx={{ p: 3, borderRadius: "15px" }}>
+            <Box>
+              <StyledTypography>Title</StyledTypography>
+              <StyledTextField
+                fullWidth
+                variant="filled"
+                label="Todo List Title"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.title}
+                name="title"
+                error={!!touched.title && !!errors.title}
+                helperText={touched.title && errors.title}
+                size="small"
+              />
+              <StyledTypography>Description</StyledTypography>
+              <StyledTextField
+                fullWidth
+                variant="filled"
+                label="Todo List Title Description"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
+                size="small"
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 2 }}
+                disabled={!(dirty && isValid)}
+              >
+                {isAdd ? "Create" : "Update"} Todo List
+              </Button>
+            </Box>
+          </Paper>
+        </form>
       </Box>
     </Box>
   );
