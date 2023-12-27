@@ -78,7 +78,7 @@ const UserLogin: React.FC = () => {
           <StyledTextField
             fullWidth
             variant="filled"
-            label="email"
+            label="Email"
             onBlur={handleBlur}
             onChange={handleChange}
             value={values.email}
