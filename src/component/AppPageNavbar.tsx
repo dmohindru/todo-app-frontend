@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
+import { Link } from "react-router-dom";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",

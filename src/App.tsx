@@ -9,37 +9,19 @@ import AppPage from "./features/app-page/AppPage";
 import { Box } from "@mui/material";
 import UserRegistration from "./component/UserRegistration";
 import UserLogin from "./component/UserLogin";
+import LandingPageLayout from "./component/LandingPageLayout";
+import AppPageLayout from "./component/AppPageLayout";
+import { Route, Routes } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <>
-      {/* Landing page layout */}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          // justifyContent: "space-between",
-          height: "100vh",
-        }}
-      >
-        <LandingPageNavbar />
-        <LandingPage />
-        {/* <UserRegistration /> */}
-        {/* <UserLogin /> */}
-        <AppFooter />
-      </Box>
-
-      {/* App Page Layout */}
-
-      {/* <AppPageNavbar /> */}
-
-      {/* <Box sx={{ display: "flex", flexDirection: "row" }}> */}
-      {/* <SideBar /> */}
-      {/* <AppPage /> */}
-      {/* <AddTodoListForm isAdd={false} /> */}
-      {/* <AddTodoForm isAdd /> */}
-      {/* </Box> */}
-    </>
+    <Routes>
+      <Route path="/" element={<LandingPageLayout />}>
+        <Route index element={<LandingPage />} />
+        <Route path="register" element={<UserRegistration />} />
+        <Route path="login" element={<UserLogin />} />
+      </Route>
+    </Routes>
   );
 };
 

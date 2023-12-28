@@ -11,6 +11,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import ThemeToggleButton from "./ThemeToggleButton";
 
 import { useState } from "react";
@@ -28,8 +29,9 @@ const LandingPageNavbar: React.FC = () => {
   // const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // TODO fix with StyledButton
   const loginButton = (
-    <StyledButton variant="contained" color="info">
+    <StyledButton variant="contained" color="info" component={Link} to="login">
       LOGIN
     </StyledButton>
   );
@@ -44,7 +46,7 @@ const LandingPageNavbar: React.FC = () => {
     <AppBar position="sticky">
       <StyledToolbar>
         {/* Left Portion of Navbar */}
-        <IconButton>
+        <IconButton component={Link} to="/">
           <Home />
         </IconButton>
 
