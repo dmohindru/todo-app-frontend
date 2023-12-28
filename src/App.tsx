@@ -18,7 +18,7 @@ const App: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
           height: "100vh",
         }}
       >
