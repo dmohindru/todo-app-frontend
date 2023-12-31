@@ -31,13 +31,13 @@ const LandingPageNavbar: React.FC = () => {
 
   // TODO fix with StyledButton
   const loginButton = (
-    <StyledButton variant="contained" color="info" component={Link} to="login">
+    <StyledButton href="login" variant="contained" color="info">
       LOGIN
     </StyledButton>
   );
 
   const registerButton = (
-    <StyledButton variant="contained" color="info">
+    <StyledButton href="register" variant="contained" color="info">
       REGISTER
     </StyledButton>
   );

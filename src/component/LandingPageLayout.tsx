@@ -9,15 +9,11 @@ const LandingPageLayout: React.FC = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        // justifyContent: "space-between",
         height: "100vh",
       }}
     >
       <LandingPageNavbar />
-      {/* <LandingPage /> */}
       <Outlet />
-      {/* <UserRegistration /> */}
-      {/* <UserLogin /> */}
       <AppFooter />
     </Box>
   );

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { FormikHelpers, useFormik } from "formik";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import PasswordField from "./PasswordField";
 
 interface RegistartionFormProps {
@@ -50,12 +51,15 @@ const StyledTextField = styled(TextField)({
 });
 
 const UserRegistration: React.FC = () => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues,
     validationSchema: registrationFormSchema,
     onSubmit: (values, { resetForm }: FormikHelpers<RegistartionFormProps>) => {
       console.log("values", values);
       resetForm();
+      navigate("/");
     },
   });
 

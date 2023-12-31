@@ -21,6 +21,9 @@ const App: React.FC = () => {
         <Route path="register" element={<UserRegistration />} />
         <Route path="login" element={<UserLogin />} />
       </Route>
+      <Route path="/app" element={<AppPageLayout />}>
+        <Route index element={<App />} />
+      </Route>
     </Routes>
   );
 };

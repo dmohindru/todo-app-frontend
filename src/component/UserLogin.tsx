@@ -7,6 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { FormikHelpers, useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import PasswordField from "./PasswordField";
 
@@ -38,12 +39,15 @@ const StyledTextField = styled(TextField)({
 });
 
 const UserLogin: React.FC = () => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues,
     validationSchema: userLoginFormSchema,
     onSubmit: (values, { resetForm }: FormikHelpers<LoginFormProps>) => {
       console.log("values", values);
       resetForm();
+      navigate("/app");
     },
   });
 
