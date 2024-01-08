@@ -21,6 +21,7 @@ const SideBarItems: React.FC<SidBarItemsProps> = ({ titleName, isMobile }) => {
           alignItems: "center",
           justifyContent: "flex-start",
         }}
+        href="/app/app-page"
       >
         <Avatar
           sx={{

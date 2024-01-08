@@ -111,6 +111,7 @@ const AddTodoTitleForm: React.FC<TodoTitleFormProps> = ({ isAdd }) => {
                 fullWidth
                 sx={{ mt: 2 }}
                 disabled={!(dirty && isValid)}
+                href="app-page"
               >
                 {isAdd ? "Create" : "Update"} Todo List
               </Button>

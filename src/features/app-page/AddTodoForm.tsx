@@ -110,6 +110,7 @@ const AddTodoForm: React.FC<TodoFormProps> = ({ isAdd }) => {
                 fullWidth
                 sx={{ mt: 2 }}
                 disabled={!(dirty && isValid)}
+                href="app-page"
               >
                 {isAdd ? "Create" : "Update"} a Todo
               </Button>

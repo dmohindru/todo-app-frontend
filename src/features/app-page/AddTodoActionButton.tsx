@@ -8,7 +8,7 @@ const AddTodoActionButton: React.FC = () => {
         title="Add a TODO"
         sx={{ poistion: "fixed", bottom: 20, left: "calc(50%)" }}
       >
-        <Fab>
+        <Fab href="add-todo">
           <AddIcon />
         </Fab>
       </Tooltip>

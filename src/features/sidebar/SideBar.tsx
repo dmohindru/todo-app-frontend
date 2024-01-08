@@ -25,7 +25,9 @@ const SideBar: React.FC = () => {
           {data.map((item, i) => (
             <SideBarItems key={item.titleName} titleName={item.titleName} />
           ))}
-          <Button fullWidth>Add</Button>
+          <Button fullWidth href="/app/add-todo-list">
+            Add
+          </Button>
         </Stack>
       </Box>
     </SideBarBox>

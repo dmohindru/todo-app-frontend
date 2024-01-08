@@ -38,7 +38,7 @@ const AppPageNavbar: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   const logoutButton = (
-    <StyledButton variant="contained" color="info">
+    <StyledButton href="/" variant="contained" color="info">
       LOGOUT
     </StyledButton>
   );
@@ -54,7 +54,7 @@ const AppPageNavbar: React.FC = () => {
       <StyledToolbar>
         {/* Left portion of App Bar */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton>
+          <IconButton href="/app">
             <Home />
           </IconButton>
           <Typography
