@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
-import { Link } from "react-router-dom";
+import { useKeycloak } from "@react-keycloak/web";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -37,8 +37,15 @@ const AppPageNavbar: React.FC = () => {
   //   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const { keycloak } = useKeycloak();
+
   const logoutButton = (
-    <StyledButton href="/" variant="contained" color="info">
+    <StyledButton
+      // href="/"
+      variant="contained"
+      color="info"
+      onClick={() => keycloak.logout()}
+    >
       LOGOUT
     </StyledButton>
   );

@@ -3,13 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Keycloak from "keycloak-js";
+import keycloak from "./auth/Keycloak";
 
 /*
 Init Options
 */
 
-let initOptions = {
+/*let initOptions = {
   url: "http://localhost:8180",
   realm: "todoapp",
   clientId: "todo-react-client",
@@ -41,17 +43,19 @@ kc.init({
   () => {
     console.log("Authentication failed");
   }
-);
+);*/
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
+  <ReactKeycloakProvider authClient={keycloak}>
     <Router>
       <Routes>
         <Route path="/*" element={<App />} />
       </Routes>
     </Router>
-  </React.StrictMode>
+  </ReactKeycloakProvider>
+  //</React.StrictMode>
 );

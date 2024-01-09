@@ -4,8 +4,8 @@ interface AppCardProps {
   imgUrl: string;
 }
 const AppCard: React.FC<AppCardProps> = ({ text, imgUrl }) => {
-  console.log("imgUrl", imgUrl);
-  console.log("text", text);
+  // console.log("imgUrl", imgUrl);
+  // console.log("text", text);
   return (
     <Card sx={{ maxWidth: 250, maxHeight: 250 }}>
       <CardMedia component="img" width={250} height={200} image={imgUrl} />
