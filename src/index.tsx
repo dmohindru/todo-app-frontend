@@ -4,58 +4,23 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import Keycloak from "keycloak-js";
 import keycloak from "./auth/Keycloak";
-
-/*
-Init Options
-*/
-
-/*let initOptions = {
-  url: "http://localhost:8180",
-  realm: "todoapp",
-  clientId: "todo-react-client",
-};
-
-let kc = new Keycloak(initOptions);
-
-kc.init({
-  onLoad: "login-required",
-  checkLoginIframe: true,
-  pkceMethod: "S256",
-}).then(
-  (auth) => {
-    console.log("keycloak login auth object", auth);
-    if (!auth) {
-      window.location.reload();
-    } else {
-      // successful authentication
-      console.log("Authentication");
-      console.log("auth", auth);
-      console.log("Keycloak", kc);
-      console.log("Access Token", kc.token);
-
-      kc.onTokenExpired = () => {
-        console.log("token expire");
-      };
-    }
-  },
-  () => {
-    console.log("Authentication failed");
-  }
-);*/
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  //<React.StrictMode>
+  // <React.StrictMode>
   <ReactKeycloakProvider authClient={keycloak}>
-    <Router>
-      <Routes>
-        <Route path="/*" element={<App />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </Router>
+    </Provider>
   </ReactKeycloakProvider>
-  //</React.StrictMode>
+  // </React.StrictMode>
 );

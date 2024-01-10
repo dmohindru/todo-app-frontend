@@ -16,6 +16,8 @@ import {
 import { useState } from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useKeycloak } from "@react-keycloak/web";
+import { useTypeSelector, useAppDispatch } from "../hooks/useHooks";
+import { addAuth } from "../app/store";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -36,23 +38,39 @@ const Search = styled("div")(({ theme }) => ({
 const AppPageNavbar: React.FC = () => {
   //   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const { keycloak } = useKeycloak();
+
+  const handleLogout = () => {
+    dispatch(
+      addAuth({
+        refreshToken: "",
+        accessToken: "",
+      })
+    );
+    keycloak.logout();
+  };
 
   const logoutButton = (
     <StyledButton
       // href="/"
       variant="contained"
       color="info"
-      onClick={() => keycloak.logout()}
+      onClick={handleLogout}
     >
       LOGOUT
     </StyledButton>
   );
 
+  const authState = useTypeSelector((state) => state.auth);
+  const firstInitial = authState.firstName?.charAt(0).toUpperCase() ?? "";
+  const lastInitial = authState.lastName?.charAt(0).toUpperCase() ?? "";
+  const initials = firstInitial + lastInitial;
+
   const avatar = (
     <Avatar sx={{ width: 36, height: 36, fontSize: 14, fontWeight: "bold" }}>
-      DM
+      {initials}
     </Avatar>
   );
 

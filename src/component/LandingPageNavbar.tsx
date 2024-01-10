@@ -44,7 +44,12 @@ const LandingPageNavbar: React.FC = () => {
   );
 
   const registerButton = (
-    <StyledButton href="register" variant="contained" color="info">
+    <StyledButton
+      // href="register"
+      variant="contained"
+      color="info"
+      onClick={() => keycloak.register()}
+    >
       REGISTER
     </StyledButton>
   );
