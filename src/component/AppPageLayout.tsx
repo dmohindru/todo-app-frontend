@@ -13,7 +13,7 @@ const AppPageLayout: React.FC = () => {
   console.log(location.state);
   const dispatch = useAppDispatch();
 
-  if (keycloak.authenticated) {
+  if (keycloak.authenticated && location.state) {
     dispatch(
       addAuth({
         refreshToken: location.state.refreshToken,

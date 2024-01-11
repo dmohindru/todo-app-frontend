@@ -1,8 +1,16 @@
 import { Box, Stack, styled, Button } from "@mui/material";
 import SideBarItems from "./SideBarItems";
+import { useGetUserTodoListQuery } from "../app-page/TodoListSlice";
+import { User } from "../../dto/dto";
 
 const SideBar: React.FC = () => {
-  const data = [
+  const { data, isLoading, isFetching, isError, isSuccess } =
+    useGetUserTodoListQuery();
+
+  console.log("data", data);
+  console.log("isSuccess", isSuccess);
+
+  const listData = [
     { id: "id-1", titleName: "Grocery" },
     { id: "id-2", titleName: "School List" },
     { id: "id-3", titleName: "Shopping List" },
@@ -22,9 +30,10 @@ const SideBar: React.FC = () => {
     <SideBarBox>
       <Box position="fixed" sx={{ mt: 5 }}>
         <Stack spacing={4}>
-          {data.map((item, i) => (
-            <SideBarItems key={item.titleName} titleName={item.titleName} />
-          ))}
+          {data &&
+            data.todoTitleList.map((item, i) => (
+              <SideBarItems key={item.id} titleName={item.titleName} />
+            ))}
           <Button fullWidth href="/app/add-todo-list">
             Add
           </Button>
